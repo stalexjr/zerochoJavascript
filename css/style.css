@@ -1,0 +1,61 @@
+@charset "utf-8";
+@import "./reset.css";
+@import url('https://fonts.googleapis.com/css2?family=Gugi&family=Jua&display=swap');
+
+*{
+  font-family: 'Gugi', cursive;
+}
+
+main{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+    
+}
+#background{
+  text-align: center;
+}
+#background #title{
+  font-size: 5rem;
+  margin-bottom: 10rem;
+}
+#title .subTitle{
+  font-size: 2.3rem;
+  color: rgba(0, 0, 0, 0.3);
+}
+#background #startButton{
+  padding: 1rem 6rem;
+  text-decoration: none;
+  background-color: #ff3b30;
+  color: #fff;
+  border-radius: 10px;
+  font-size: 1.5rem;
+}
+#background #startButton:hover{
+  background-color: #df1b10;
+  transition: background-color 0.3s;
+}
+
+
+#title {
+  position: relative;
+  /* -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0,0,0,.2)); */
+
+}
+#title span {
+  position: relative;
+  display: inline-block;
+  animation: title 2s infinite;
+  animation-delay: calc(.1s * var(--i));
+  }
+  @keyframes title {
+  0%,40%,100% {
+    transform: translateY(0)
+  }
+  20% {
+    transform: translateY(-20px)
+  }
+}
