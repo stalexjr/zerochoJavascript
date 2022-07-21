@@ -29,12 +29,12 @@ const $result = document.querySelector("#result");
 
 
 const onClickNumber = (event) => {
-  if (!operator) {
+  if (!operator) { // 비어있다.
     numOne += event.target.textContent;
     $result.value += event.target.textContent;
     return;
   }
-  if(!numTwo){
+  if(!numTwo){ // 비어있지 않다.
     $result.value = "";
   }
   numTwo += event.target.textContent;
@@ -42,7 +42,7 @@ const onClickNumber = (event) => {
 };
 
 
-
+// 숫자버튼
 
 document.querySelector("#num-0").addEventListener("click", onClickNumber);
 document.querySelector("#num-1").addEventListener("click", onClickNumber);
