@@ -75,7 +75,9 @@ document.querySelector("#divide").addEventListener("click", onClickOperator("/")
 document.querySelector("#multiply").addEventListener("click", onClickOperator("*"));
 
 document.querySelector("#clear").addEventListener("click",() => {
-  
+  numOne = '';
+  numTwo = '';
+  operator = '';
   $result.value = '';
   $operator.value = '';
 });
@@ -86,13 +88,13 @@ document.querySelector("#calculate").addEventListener("click",() => {
         $result.value = parseInt(numOne) + parseInt(numTwo);
         break;
       case '-':
-        $result.value = parent(numOne) - parseInt(numTwo);
+        $result.value = parseInt(numOne) - parseInt(numTwo);
         break;
       case '*':
-        $result.value = parent(numOne) * parseInt(numTwo);
+        $result.value = parseInt(numOne) * parseInt(numTwo);
         break;
       case '/':
-        $result.value = parent(numOne) / parseInt(numTwo);
+        $result.value = parseInt(numOne) / parseInt(numTwo);
       default:
         break;
     }
