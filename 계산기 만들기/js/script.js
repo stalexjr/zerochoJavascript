@@ -103,14 +103,16 @@ document.querySelector("#calculate").addEventListener("click",() => {
   // }
 
   if(numTwo){
-    if(operator = '+'){ //스위치문 if문으로 바꿔보기
-      $result.value = parseInt(numOne) + parseInt(numTwo);
-    }else if(operator = '-'){
-      $result.value = parseInt(numOne) - parseInt(numTwo);
-    }else if(operator = '*'){
-      $result.value = parseInt(numOne) * parseInt(numTwo);
-    }else if(operator = '/'){
-      $result.value = parseInt(numOne) / parseInt(numTwo);
+    if(operator){
+      if( $operator.value == '+'){ //스위치문 if문으로 바꿔보기
+        $result.value = parseInt(numOne) + parseInt(numTwo);
+      }else if( $operator.value == '-'){
+        $result.value = parseInt(numOne) - parseInt(numTwo);
+      }else if( $operator.value == '*'){
+        $result.value = parseInt(numOne) * parseInt(numTwo);
+      }else if( $operator.value == '/'){
+        $result.value = parseInt(numOne) / parseInt(numTwo);
+      }
     }
   }else{
     alert('숫자를 먼저 입력하세요');
