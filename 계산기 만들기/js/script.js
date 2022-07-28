@@ -83,7 +83,7 @@ document.querySelector("#clear").addEventListener("click",() => {
 });
 document.querySelector("#calculate").addEventListener("click",() => {
   if(numTwo){
-    switch(operator){
+    switch(operator){ //스위치문 if문으로 바꿔보기
       case '+':
         $result.value = parseInt(numOne) + parseInt(numTwo);
         break;
