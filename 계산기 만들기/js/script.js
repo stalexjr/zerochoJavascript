@@ -82,21 +82,35 @@ document.querySelector("#clear").addEventListener("click",() => {
   $operator.value = '';
 });
 document.querySelector("#calculate").addEventListener("click",() => {
+  // if(numTwo){
+  //   switch(operator){ 
+  //     case '+':
+  //       $result.value = parseInt(numOne) + parseInt(numTwo);
+  //       break;
+  //     case '-':
+  //       $result.value = parseInt(numOne) - parseInt(numTwo);
+  //       break;
+  //     case '*':
+  //       $result.value = parseInt(numOne) * parseInt(numTwo);
+  //       break;
+  //     case '/':
+  //       $result.value = parseInt(numOne) / parseInt(numTwo);
+  //     default:
+  //       break;
+  //   }
+  // }else{
+  //   alert('숫자를 먼저 입력하세요');
+  // }
+
   if(numTwo){
-    switch(operator){ //스위치문 if문으로 바꿔보기
-      case '+':
-        $result.value = parseInt(numOne) + parseInt(numTwo);
-        break;
-      case '-':
-        $result.value = parseInt(numOne) - parseInt(numTwo);
-        break;
-      case '*':
-        $result.value = parseInt(numOne) * parseInt(numTwo);
-        break;
-      case '/':
-        $result.value = parseInt(numOne) / parseInt(numTwo);
-      default:
-        break;
+    if(operator = '+'){ //스위치문 if문으로 바꿔보기
+      $result.value = parseInt(numOne) + parseInt(numTwo);
+    }else if(operator = '-'){
+      $result.value = parseInt(numOne) - parseInt(numTwo);
+    }else if(operator = '*'){
+      $result.value = parseInt(numOne) * parseInt(numTwo);
+    }else if(operator = '/'){
+      $result.value = parseInt(numOne) / parseInt(numTwo);
     }
   }else{
     alert('숫자를 먼저 입력하세요');
