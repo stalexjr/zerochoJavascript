@@ -9,6 +9,7 @@ const $result = document.querySelector("#result");
 // number
 
 // const onClickNumber = (event) => {
+
 //   if (operator) {
 //     if(!numTwo){
 //       $result.value = "";
@@ -20,6 +21,8 @@ const $result = document.querySelector("#result");
 //   $result.value += event.target.textContent;
 // };
 
+// 이사님께서 쓰지말라하심 이런 로직은 말이 안된다고
+
 
 // if 조건문의 중첩은 코드를 읽기 어렵다. 그래서 밑의 코드처럼 작업을 진행해야 한다.
 // 첫번째 단계로 onClickNumber 함수에서 if문과 상관없이 공통적으로 실행되는 부분은 $result.value += event.target.textContent;이다. 이 부분은 각 분기점 안에 넣는다.
@@ -29,16 +32,21 @@ const $result = document.querySelector("#result");
 
 
 const onClickNumber = (event) => {
+  
+  //좌변
   if (!operator) { // 비어있다.
     numOne += event.target.textContent;
-    $result.value += event.target.textContent;
+    $result.value = numOne;
     return;
   }
+
+  //우변
+  //operator == true ( + , - , / * )
   if(!numTwo){ // 비어있지 않다.
     $result.value = "";
   }
   numTwo += event.target.textContent;
-  $result.value += event.target.textContent;
+  $result.value = numTwo;
 };
 
 
@@ -64,7 +72,7 @@ const onClickOperator = (op) => () => {
     operator = op;
     $operator.value = op;
   } else {
-    alert('숫자를 먼저 입력하세요');
+    alert('왼쪽 숫자를 먼저 입력하세요');
   }
 }
 
@@ -115,7 +123,7 @@ document.querySelector("#calculate").addEventListener("click",() => {
       }
     }
   }else{
-    alert('숫자를 먼저 입력하세요');
+    alert('오른쪽 숫자를 먼저 입력하세요');
   }
 });
 
