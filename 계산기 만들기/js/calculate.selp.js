@@ -32,7 +32,7 @@ const $result = document.querySelector("#result");
 
 
 // const onClickNumber = (event) => {
-  
+
 //   //좌변
 //   if (!operator) { // 비어있다.
 //     numOne += event.target.textContent;
@@ -50,7 +50,7 @@ const $result = document.querySelector("#result");
 // };
 
 const onClickNumber = (event) => {
-  
+
   //좌변
   if (!operator) { // 비어있다.
     numOne += event.target.textContent;
@@ -60,7 +60,7 @@ const onClickNumber = (event) => {
 
   //우변
   //operator == true ( + , - , / * )
-  if(!numTwo){ // 비어있지 않다.
+  if (!numTwo) { // 비어있지 않다.
     $result.value = "";
   }
   numTwo += event.target.textContent;
@@ -85,30 +85,8 @@ document.querySelector("#num-9").addEventListener("click", onClickNumber);
 
 
 const onClickOperator = (op) => () => {
-  if (numOne) {
-    operator = op;
-    $operator.value = op;
-  } else {
-    alert('왼쪽 숫자를 먼저 입력하세요');
-  }
-}
-
-
-document.querySelector("#plus").addEventListener("click", onClickOperator("+"));
-document.querySelector("#minus").addEventListener("click", onClickOperator("-"));
-document.querySelector("#divide").addEventListener("click", onClickOperator("/"));
-document.querySelector("#multiply").addEventListener("click", onClickOperator("*"));
-
-document.querySelector("#clear").addEventListener("click",() => {
-  numOne = '';
-  numTwo = '';
-  operator = '';
-  $result.value = '';
-  $operator.value = '';
-});
-document.querySelector("#calculate").addEventListener("click",() => {
-  if(numTwo){
-    switch(operator){ 
+  if (numTwo) {
+    switch (operator) {
       case '+':
         $result.value = parseInt(numOne) + parseInt(numTwo);
         break;
@@ -123,26 +101,73 @@ document.querySelector("#calculate").addEventListener("click",() => {
       default:
         break;
     }
-  }else{
-    alert('숫자를 먼저 입력하세요');
+    numOne = $result.value;
+    numTwo = '';
+  }
+    if (numOne) {
+      operator = op;
+      $operator.value = op;
+    } else {
+      alert('숫자를 먼저 입력하세요');
+    }
   }
 
-  // if(numTwo){
-  //   if(operator){
-  //     if( $operator.value == '+'){ //스위치문 if문으로 바꿔보기
-  //       $result.value = parseInt(numOne) + parseInt(numTwo);
-  //     }else if( $operator.value == '-'){
-  //       $result.value = parseInt(numOne) - parseInt(numTwo);
-  //     }else if( $operator.value == '*'){
-  //       $result.value = parseInt(numOne) * parseInt(numTwo);
-  //     }else if( $operator.value == '/'){
-  //       $result.value = parseInt(numOne) / parseInt(numTwo);
-  //     }
-  //   }
-  // }else{
-  //   alert('오른쪽 숫자를 먼저 입력하세요');
-  // }
-});
 
+  document.querySelector("#plus").addEventListener("click", onClickOperator("+"));
+  document.querySelector("#minus").addEventListener("click", onClickOperator("-"));
+  document.querySelector("#divide").addEventListener("click", onClickOperator("/"));
+  document.querySelector("#multiply").addEventListener("click", onClickOperator("*"));
 
+  document.querySelector("#clear").addEventListener("click", () => {
+    numOne = '';
+    numTwo = '';
+    operator = '';
+    $result.value = '';
+    $operator.value = '';
+  });
+  document.querySelector("#calculate").addEventListener("click", () => {
+    if (numTwo) {
+      switch (operator) {
+        case '+':
+          $result.value = parseInt(numOne) + parseInt(numTwo);
+          break;
+        case '-':
+          $result.value = parseInt(numOne) - parseInt(numTwo);
+          break;
+        case '*':
+          $result.value = parseInt(numOne) * parseInt(numTwo);
+          break;
+        case '/':
+          $result.value = parseInt(numOne) / parseInt(numTwo);
+        default:
+          break;
+      }
+      $operator.value = '';
+      numOne = $result.value;
+      operator = '';
+      numTwo = '';
+      // 1 + 2 + 4 같은 연산을 할 때 추가로 변수를 선언해주는 것이 아니라, numtwo의 값과 operator의 값을 비운 뒤 numOne의 값을 저장하면 된다.
 
+    } else {
+      alert('숫자를 먼저 입력하세요');
+    }
+  });
+    
+    // if(numTwo){
+    //   if(operator){
+    //     if( $operator.value == '+'){ //스위치문 if문으로 바꿔보기
+    //       $result.value = parseInt(numOne) + parseInt(numTwo);
+    //     }else if( $operator.value == '-'){
+    //       $result.value = parseInt(numOne) - parseInt(numTwo);
+    //     }else if( $operator.value == '*'){
+    //       $result.value = parseInt(numOne) * parseInt(numTwo);
+    //     }else if( $operator.value == '/'){
+    //       $result.value = parseInt(numOne) / parseInt(numTwo);
+    //     }
+    //   }
+    // }else{
+    //   alert('오른쪽 숫자를 먼저 입력하세요');
+    // }
+    // });
+
+  
