@@ -58,7 +58,7 @@ console.log("tries", tries);
 //     return alert('다시 입력해 주세요');
 //   };
 // });
-
+let out = 0;
 $form.addEventListener('submit', (e) => {
   e.preventDefault(); //기본 동작 막기
   const value = $input.value;
@@ -76,6 +76,7 @@ $form.addEventListener('submit', (e) => {
     $logs.appendChild(message);
     return;
   }
+
   // 몇 스트라이크 몇 볼인지 검사
   let strike = 0;
   let ball = 0;
@@ -89,6 +90,16 @@ $form.addEventListener('submit', (e) => {
       }
     }
   }
-  $logs.append(`${value} : ${strike} 스트라이크 ${ball} 볼`, document.createElement('br'));
+  if(strike === 0 && ball === 0){
+    out++;
+    $logs.append(`${value} : 아웃!`,document.createElement('br'));
+  }else{
+    $logs.append(`${value} : ${strike} 스트라이크 ${ball} 볼`, document.createElement('br'));
+  }
+  if(out === 3){
+    const message = document.createTextNode(`패배! 정답은 ${answer.join('')}`);
+    $logs.appendChild(message);
+    return;
+  }
   tries.push(value);
 });
