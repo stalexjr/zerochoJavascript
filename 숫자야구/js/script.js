@@ -92,7 +92,7 @@ $form.addEventListener('submit', (e) => {
   }
   if(strike === 0 && ball === 0){
     out++;
-    $logs.append(`${value} : 아웃!`,document.createElement('br'));
+    $logs.append(`${value} : 아웃! : ${out}`,document.createElement('br'));
   }else{
     $logs.append(`${value} : ${strike} 스트라이크 ${ball} 볼`, document.createElement('br'));
   }
@@ -103,3 +103,17 @@ $form.addEventListener('submit', (e) => {
   }
   tries.push(value);
 });
+
+
+// forEach 문
+
+answer.forEach((element, i)=>{
+  const index = value.indexOf(answer[i]);
+  if(index > -1){ // 일치하는 숫자 발견
+    if(index === i){ // 자릿수도 같음
+      strike += 1;
+    }else{ // 숫자만 같음
+      ball += 1;
+    }
+  }
+})
