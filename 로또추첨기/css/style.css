@@ -1,0 +1,73 @@
+@charset "utf-8";
+@import url('https://fonts.googleapis.com/css2?family=Gugi&display=swap');
+*{
+  /* font-family: 'Gugi', cursive; */
+}
+section{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+/* 타이틀 */
+
+#title{
+  font-family: 'Gugi', cursive;
+  font-size: 5rem;
+}
+#title #img{
+  width: 300px;
+  height: 300px;
+  margin: 0 auto;
+  background-image: url(../img/2777B04E5881F9BA03.jpg);
+  background-position: 50% 50%;
+  background-size: cover;
+}
+#title span {
+  position: relative;
+  display: inline-block;
+  animation: title 2s infinite;
+  animation-delay: calc(.1s * var(--i));
+  }
+  @keyframes title {
+  0%,40%,100% {
+    transform: translateY(0)
+  }
+  20% {
+    transform: translateY(-20px)
+  }
+}
+
+/* 버튼 */
+
+#button{
+  margin-top: 4rem;
+  background-color: #fff;
+  width: 200px;
+  height: 80px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+#button:hover{
+  background-color: lawngreen;
+  transition: background 0.5s;
+}
+#button p{
+  font-family: 'Gugi', cursive;
+  font-size: 1.4rem;
+}
+
+/* 숫자 볼 */
+
+.ball{
+  display: inline-block;
+  border: 1px solid #000;
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 20px;
+  text-align: center;
+  margin-right: 20px;
+}
