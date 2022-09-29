@@ -13,7 +13,6 @@ const bonus = shuffle[6];
 console.log(winBalls, bonus);
 
 const showBall = (number, $target) => {
-  
   const $ball = document.createElement('div');
   $ball.className = 'ball';
   $ball.textContent = number;
@@ -22,27 +21,33 @@ const showBall = (number, $target) => {
 
 const $result = document.querySelector('#result');
 const $bonus = document.querySelector('#bonus');
-setTimeout(() =>{
-  showBall(winBalls[0], $result);
-}, 1000);
-setTimeout(() =>{
-  showBall(winBalls[1], $result);
-}, 2000);
-setTimeout(() =>{
-  showBall(winBalls[2], $result);
-}, 3000);
-setTimeout(() =>{
-  showBall(winBalls[3], $result);
-}, 4000);
-setTimeout(() =>{
-  showBall(winBalls[4], $result);
-}, 5000);
-setTimeout(() =>{
-  showBall(winBalls[5], $result);
-}, 6000);
+
+for(let i = 0; i < 6; i++){
+  setTimeout(() =>{
+    showBall(winBalls[i], $result);
+  }, (i + 1) * 1000);
+}
 setTimeout(() =>{
   showBall(bonus, $bonus);
 }, 7000);
+
+// setTimeout(() =>{
+//   showBall(winBalls[1], $result);
+// }, 2000);
+// setTimeout(() =>{
+//   showBall(winBalls[2], $result);
+// }, 3000);
+// setTimeout(() =>{
+//   showBall(winBalls[3], $result);
+// }, 4000);
+// setTimeout(() =>{
+//   showBall(winBalls[4], $result);
+// }, 5000);
+// setTimeout(() =>{
+//   showBall(winBalls[5], $result);
+// }, 6000);
+
+
 // for(let i = 0; i < candidate.length; i+1){
 //     const random = Math.floor(Math.random() * candidate.length); //무작위 인덱스 뽑기
 //     const spliceArray = candidate.splice(random, 1); // 뽑은 값은 배열에 들어있음
