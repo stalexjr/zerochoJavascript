@@ -12,9 +12,27 @@ const winBalls = shuffle.slice(0, 6).sort((a, b) => a - b );
 const bonus = shuffle[6];
 console.log(winBalls, bonus);
 
+function colorize(number, $tag){
+  if(number < 10){
+    $tag.style.backgroundColor = 'red';
+    $tag.style.color = 'white';
+  }else if(number < 20){
+    $tag.style.backgroundColor = 'orange';
+  }else if(number < 30){
+    $tag.style.backgroundColor = 'yellow';
+  }else if(number < 40){
+    $tag.style.backgroundColor = 'blue';
+    $tag.style.color = 'white';
+  }else{
+    $tag.style.backgroundColor = 'green';
+    $tag.style.color = 'white';
+  }
+}
+
 const showBall = (number, $target) => {
   const $ball = document.createElement('div');
   $ball.className = 'ball';
+  colorize(number, $ball);
   $ball.textContent = number;
   $target.appendChild($ball);
 };
@@ -22,14 +40,15 @@ const showBall = (number, $target) => {
 const $result = document.querySelector('#result');
 const $bonus = document.querySelector('#bonus');
 
-for(let i = 0; i < 6; i++){
+for(let i = 0; i < winBalls.length; i++){
   setTimeout(() =>{
-    showBall(winBalls[i], $result);
+    showBall(winBalls[i], $result); 
   }, (i + 1) * 1000);
 }
 setTimeout(() =>{
   showBall(bonus, $bonus);
 }, 7000);
+
 
 // setTimeout(() =>{
 //   showBall(winBalls[1], $result);
@@ -45,7 +64,7 @@ setTimeout(() =>{
 // }, 5000);
 // setTimeout(() =>{
 //   showBall(winBalls[5], $result);
-// }, 6000);
+// }, 6000);        
 
 
 // for(let i = 0; i < candidate.length; i+1){
