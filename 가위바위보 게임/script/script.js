@@ -58,7 +58,9 @@ const scoreTable = {
 };
 
 let clickable = true;
-let score = 0;
+// let score = 0;
+let computer = 0;
+let me = 0;
 const clickButton = () =>{
 	if(clickable){
 		clearInterval(intervalId);
@@ -82,15 +84,26 @@ const clickButton = () =>{
 
 		// 2, -1은 승리조건이고, -2, 1은 패배조건, 점수표 참고
 		if([2, -1].includes(diff)){
-			score += 1;
+			me += 1;
 			message = '승리';
 		} else if ([-2, 1].includes(diff)){
-			score -= 1;
+			computer += 1;
 			message = '패배';
 		}else{
 			message = '무승부'
 		}
-		$score.textContent = `${message} 총 : ${score} 점`;
+		if(me >= 3){
+			$score.textContent = `나의 승리 ${me}:${computer}`;
+		}else if(computer >= 3){
+			$score.textConter = `컴퓨터의 승리 ${computer}:${me}`;
+		}else{
+			$score.textContent = `${message} ${me}:${computer}`;
+			setTimeout(()=>{
+				clickable = true;
+				intervalId = setInterval(changeComputerHand, 50);
+			}, 1000);
+		}
+		$score.textContent = `${message} 총 : ${me} 점`;
 		// if(myChoice === 'rock') {
 		// 	if(computerChoise === 'rock'){
 		// 		console.log('무승부');
@@ -119,10 +132,10 @@ const clickButton = () =>{
 		// 위에 코드가 중복이 많아보임 중복 제거 하기를 위해선 위에 scoreTable이란 객체를 만들어주고 규칙을 찾아서 함수를 입력해주면 된다
 
 
-		setTimeout(()=>{
-			clickable = true;
-			intervalId = setInterval(changeComputerHand, 50);
-		}, 1000);
+		// setTimeout(()=>{
+		// 	clickable = true;
+		// 	intervalId = setInterval(changeComputerHand, 50);
+		// }, 1000);
 	}
 };
 
