@@ -6,13 +6,15 @@ $screen.classList.contains('');
 let startTime;
 let endTime;
 const records = [];
+// const recordsAverage = [];
 
+let timeOutId;
 $screen.addEventListener('click', (e) => {
 	if (e.target.classList.contains('waiting')) {	//파랑
 		$screen.classList.remove('waiting');
 		$screen.classList.add('ready');
 		$screen.textContent = '초록색이 되면 클릭하세요';
-		setTimeout(()=>{
+		timeOutId = setTimeout(()=>{
 			startTime = new Date();
 			$screen.classList.remove('ready');
 			$screen.classList.add('now');
@@ -20,7 +22,10 @@ $screen.addEventListener('click', (e) => {
 			// 첫 시간 재기
 		}, Math.floor(Math.random() * 1000) + 2000); // 2000 ~ 3000 사이 수
 	} else if (e.target.classList.contains('ready')) {	//빨강
-
+		clearTimeout(timeOutId);
+		$screen.classList.remove('ready');
+		$screen.classList.add('waiting');
+		$screen.textContent = '너무 성급하세요😅';
 	} else if (e.target.classList.contains('now')) {	//초록
 		// 끝 시간 재기 
 		// 시간 차이 저장하기
@@ -28,6 +33,41 @@ $screen.addEventListener('click', (e) => {
 		const current = endTime - startTime;
 		records.push(current);
 		const average = records.reduce((a, c)=> a + c) / records.length;
+		// average = records.slice(0, 5).sort((a,b)=> a - b);
+		// console.log(average);
+
+		
+		// recordsAverage.push(average);
+		// recordsAverage.slice(0, 5).sort((a, b)=> a - b);
+		// console.log(recordsAverage);
+		// 👆 내가 쓴 답 
+
+		$result.textContent = `현재 ${current}ms, 평균 : ${average}ms`;
+		// const topFive = records.sort((p, c)=> p - c).slice(0, 5);
+		// topFive.forEach((top, index) =>{
+		// 	$result.append(
+		// 		document.createElement('br'),
+		// 		`${index + 1}위 : ${top}ms`,
+		// 	)
+		// });
+		
+		const topFive = records.sort((p, c ) => p - c).slice(0, 5);
+		topFive.forEach((top, index) =>{
+			$result.append(
+				document.createElement('br'),
+				`${index + 1}위 : ${top}ms`,
+			)
+		});
+		startTime = null;
+		endTime = null;
+		// 👆 초기화 안써도 되지만 혹시나 전에 있던 데이터가 있을 가능성도 있어서 비워둠
+		// $result.textContent = `${endTime - startTime}ms`;
+		$screen.classList.remove('now');
+		$screen.classList.add('waiting');
+		$screen.textContent = '클릭해서 시작하세요';
+	}
+});
+
 
 		// 👆 평균 구하기 평균은 자주 구하기 때문에 외워놓으면 좋음
 		// a = 누적값 c = 현재값 a + c 는 다음 누적값이다.
@@ -53,15 +93,3 @@ $screen.addEventListener('click', (e) => {
 		//a : {0: '우진', 1: '민수'} c: 상엽
 		//a : {0: '우진', 1: '민수', 2: '상엽'} c: 상현
 		// a : {0: '우진', 1: '민수', 2: '상엽' 3 : '상현'}
-
-
-		$result.textContent = `현재 ${current}ms, 평균 : ${average}ms`;
-		startTime = null;
-		endTime = null;
-		// 👆 초기화 안써도 되지만 혹시나 전에 있던 데이터가 있을 가능성도 있어서 비워둠
-		// $result.textContent = `${endTime - startTime}ms`;
-		$screen.classList.remove('now');
-		$screen.classList.add('waiting');
-		$screen.textContent = '클릭해서 시작하세요';
-	}
-});
