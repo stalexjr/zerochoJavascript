@@ -51,10 +51,10 @@ $screen.addEventListener('click', (e) => {
 		// 	)
 		// });
 		
-		const topFive = records.sort((p, c ) => p - c).slice(0, 5);
-		topFive.forEach((top, index) =>{
+		const topFive = records.sort((p, c)=>p - c).slice(0, 5);
+		topFive.forEach((top, index)=>{
 			$result.append(
-				document.createElement('br'),
+				document.createElement("br"),
 				`${index + 1}위 : ${top}ms`,
 			)
 		});
