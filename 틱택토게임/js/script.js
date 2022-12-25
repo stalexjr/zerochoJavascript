@@ -6,6 +6,20 @@ const $result = document.createElement('div');
 const rows = [];
 let turn = 'O';
 
+const checkWinner = (target) =>{
+	let rowIndex;
+	let cellIndex;
+	rows.forEach((row, ri)=>{
+		row.forEach((cell, ci)=>{
+			if(cell === target){
+				rowIndex = ri;
+				cellIndex = ci;
+			}
+		});
+	});
+
+}
+
 const callback = (e) => {
 	//칸에 글자가 있나 ? 
 	if (e.target.textContent) return;
@@ -22,6 +36,8 @@ const callback = (e) => {
 	turn = turn === 'O' ? 'X' : 'O';
 }
 
+
+
 for (let i = 0; i < 3; i++) {
 	const $tr = document.createElement('tr');
 	const cells = [];
@@ -35,6 +51,7 @@ for (let i = 0; i < 3; i++) {
 	$table.append($tr);
 }
 $table.addEventListener('click', callback);
+
 //이벤트 버블링 때문에 td에 직접적으로 이벤트리스너를 달아주지않고 부모요소인 table에다 주어도 작동하게 된다.
 // 예를들어 td에 이벤트 리스너를 달아주면, td를 눌러도 이벤트 리스너가 작동하게 되고, 그 부모인 tr에도 작동하게되고, 그 부모인 table, 심지어 body에도 실행되게된다.
 // html의 현상이다. 부모타고 계속 공기방울이 올라가는 것처럼 보인다싶어 이벤트 버블링 이라 부른다.
