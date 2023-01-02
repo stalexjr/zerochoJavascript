@@ -7,16 +7,24 @@ const rows = [];
 let turn = 'O';
 
 const checkWinner = (target) => {
-	let rowIndex;
-	let cellIndex;
-	rows.forEach((row, ri) => {
-		row.forEach((cell, ci) => {
-			if (cell === target) {
-				rowIndex = ri;
-				cellIndex = ci;
-			}
-		});
-	});
+	const rowIndex = target.parentNode.rowIndex;
+	const cellIndex = target.cellIndex;
+	// 👆 밑 코드를 위코드로 줄여줄 수 있다.
+	// parentNode 란 해당 태그의 부모요소를 찾을 수 있다. 예를 들어 rows[0][0].parentNode를 해주게 되면 td의 부모요소인 tr이 된다. rows[0][0].parentNode.parentNode는 tr의 부모요소인 table이 된다.
+	// 반대로 children은 자식요소를 찾는 태그이다.
+	// document.body.children을 하게 되면 0:script 1:table 2:div가 되고, document.body.children[1]을 하게 되면 table을 선택할 수 있다. 그리고 이것은 배열처럼 생겼지만 객체다.
+	// 그래서 유사배열은 배열의 반복문인 forEach문을 사용하지 못하지만, Array.from이라는 것을 써주게 되면 일반 배열문처럼 forEach를 사용할 수 있다. 
+	// 예를들어 Array.from($table.children)을 써주면 일반 배열로 변해서 Array.from($table.children).forEach((i)=>{console.log(i)})로 사용할 수 있다.
+	// let rowIndex;
+	// let cellIndex;
+	// rows.forEach((row, ri) => {
+	// 	row.forEach((cell, ci) => {
+	// 		if (cell === target) {
+	// 			rowIndex = ri;
+	// 			cellIndex = ci;
+	// 		}
+	// 	});
+	// });
 	// 세 칸 다 채워졌나?
 	let hasWinner = false;
 	// 검사할땐 false로 시작
@@ -66,20 +74,27 @@ const callback = (e) => {
 	// console.log('event');
 	e.target.textContent = turn;
 	//승부 확인
-	if (checkWinner(e.target)) {
+	const hasWinner = checkWinner(e.target);
+	if (hasWinner) {
 		$result.textContent = `${turn} 님의 승리 !!`;
 		$table.removeEventListener('click',callback);
 		return;
 	};
 	//무승부 검사
-	let draw = true;
-	rows.forEach((row)=>{
-		row.forEach((cell)=>{
-			if(!cell.textContent){
-				draw = false;
-			}
-		});
-	});
+	//every 매서드란 조건함수 모두 다 되야 true고 하나라도 false가 되면 false인데 이 매서드는 1차원 배열에만 사용할 수 있다. 그래서 2차원 배열에는 못쓰냐 그건 아니다 flat을 사용하게 되면 1차원 배열로 변한다.
+	// every의 반대인 some도 있다. 하나라도 칸이 차있으면 true 모두다 칸이 안차있으면 false가 된다.
+	const draw = rows.flat().every((cell)=>cell.textContent);
+	// 👆 위 코드로 줄일 수 있다.every와 flat으로 코드를 좀 더 효율적으로 짤 수 있다.
+	// let draw = true;
+	// rows.forEach((row)=>{
+	// 	console.log('row',row);
+	// 	row.forEach((cell)=>{
+	// 		console.log('cell',cell);
+	// 		if(!cell.textContent){
+	// 			draw = false;
+	// 		}
+	// 	});
+	// });
 	if(draw){
 		$result.textContent = '무승부';
 		return;
