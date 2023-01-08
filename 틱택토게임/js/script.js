@@ -62,8 +62,24 @@ const checkWinner = (target) => {
 		return hasWinner;
 };
 /*
-
+	셀프 체크
 */
+const checkWinnerAndDraw = (target) =>{
+	const hasWinner = checkWinner(target);
+		// 승자가 있으면
+		if(hasWinner){
+			$result.textContent = `${turn}님의 승리!`;
+			return;
+		}
+		// 승자가 없으면
+		const draw = rows.flat().every((cell) => cell.textContent);
+		if(draw){
+			$result.textContent = '무승부';
+			return;
+		}
+		turn = turn === 'O' ? 'X' : 'O';
+};
+
 const callback = (e) => {
 	//칸에 글자가 있나 ? 
 	if (e.target.textContent !== '') {
@@ -74,17 +90,19 @@ const callback = (e) => {
 	// console.log('event');
 	e.target.textContent = turn;
 	//승부 확인
-	const hasWinner = checkWinner(e.target);
-	if (hasWinner) {
-		$result.textContent = `${turn} 님의 승리 !!`;
-		$table.removeEventListener('click',callback);
-		return;
-	};
+	// const hasWinner = checkWinner(e.target);
+	// if (hasWinner) {
+	// 	$result.textContent = `${turn} 님의 승리 !!`;
+	// 	$table.removeEventListener('click',callback);
+	// 	return;
+	// };
+	checkWinnerAndDraw(e.target);
 	//무승부 검사
 	//every 매서드란 조건함수 모두 다 되야 true고 하나라도 false가 되면 false인데 이 매서드는 1차원 배열에만 사용할 수 있다. 그래서 2차원 배열에는 못쓰냐 그건 아니다 flat을 사용하게 되면 1차원 배열로 변한다.
 	// every의 반대인 some도 있다. 하나라도 칸이 차있으면 true 모두다 칸이 안차있으면 false가 된다.
-	const draw = rows.flat().every((cell)=>cell.textContent);
+	// const draw = rows.flat().every((cell)=>cell.textContent);
 	// 👆 위 코드로 줄일 수 있다.every와 flat으로 코드를 좀 더 효율적으로 짤 수 있다.
+	// flat은 💜차원 배열을 한단계 낮춰주는 메서드다 예를 들어 3차원 배열은 2차원으로 2차원 배열은 1차원 배열로 낮춰주는 역할을 한다.
 	// let draw = true;
 	// rows.forEach((row)=>{
 	// 	console.log('row',row);
@@ -95,17 +113,24 @@ const callback = (e) => {
 	// 		}
 	// 	});
 	// });
-	if(draw){
-		$result.textContent = '무승부';
-		return;
-	};
+	// if(draw){
+	// 	$result.textContent = '무승부';
+	// 	return;
+	// };
 	// if (turn === 'O') {
 	// 	turn = 'X';
 	// } else if (turn === 'X') {
 	// 	turn = 'O';
 	// }
 	// 👆 위 코드를 밑으로 줄일 수 있다.
-	turn = turn === 'O' ? 'X' : 'O';
+	// turn = turn === 'O' ? 'X' : 'O';
+	if(turn === 'X'){
+		const emptyCells = rows.flat().filter((v)=> !v.textContent);
+		// 👆 fliter는 조건이다. filter((v)=> !v.textContent)면 뒤에 해당되는 애들을 걸러준다. filter도 1차원 배열에만 해당되어 flat으로 1차원 배열로 만들어 준다음에 filter를 주는 것이다. 조건은 v.textContent 는 조건이면 이기때문에 !v.textContent는 빈칸이 아니면이 된다.
+		const ramdomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
+		ramdomCell.textContent = 'X';
+		checkWinnerAndDraw(e.target);
+	}
 };
 
 
