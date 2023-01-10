@@ -69,6 +69,7 @@ const checkWinnerAndDraw = (target) =>{
 		// 승자가 있으면
 		if(hasWinner){
 			$result.textContent = `${turn}님의 승리!`;
+			$table.removeEventListener('click', callback);
 			return;
 		}
 		// 승자가 없으면
@@ -78,9 +79,14 @@ const checkWinnerAndDraw = (target) =>{
 			return;
 		}
 		turn = turn === 'O' ? 'X' : 'O';
-};
+	};
+	
+
+	let clickable = true;	//플래그 변수
 
 const callback = (e) => {
+	if(!clickable) return;
+
 	//칸에 글자가 있나 ? 
 	if (e.target.textContent !== '') {
 		console.log('빈칸이 아닙니다');
@@ -124,12 +130,19 @@ const callback = (e) => {
 	// }
 	// 👆 위 코드를 밑으로 줄일 수 있다.
 	// turn = turn === 'O' ? 'X' : 'O';
+
 	if(turn === 'X'){
+		clickable = false;
 		const emptyCells = rows.flat().filter((v)=> !v.textContent);
 		// 👆 fliter는 조건이다. filter((v)=> !v.textContent)면 뒤에 해당되는 애들을 걸러준다. filter도 1차원 배열에만 해당되어 flat으로 1차원 배열로 만들어 준다음에 filter를 주는 것이다. 조건은 v.textContent 는 조건이면 이기때문에 !v.textContent는 빈칸이 아니면이 된다.
 		const ramdomCell = emptyCells[Math.floor(Math.random() * emptyCells.length)];
-		ramdomCell.textContent = 'X';
-		checkWinnerAndDraw(e.target);
+		setTimeout(()=>{
+			ramdomCell.textContent = 'X';
+			checkWinnerAndDraw(e.target);
+			clickable = true;
+		}, 1000);
+		// setTimeOut은 버그가 많다.
+
 	}
 };
 
