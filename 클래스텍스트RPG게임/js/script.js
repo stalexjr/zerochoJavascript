@@ -34,5 +34,10 @@ $startSceern.addEventListener('submit', (e) => {
 	$startSceern.style.display = 'none';
 	$gameMenu.style.display = 'block';
 	$heroName.textContent = name;
-	$heroLevel.textContent = `${hero.lev}Lev`;
-})
+	$heroLevel.textContent = `${hero.lev} Lev`;
+	$heroHp.textContent = `HP : ${hero.hp} / ${hero.maxHp}`;
+	$heroXp.textContent = `XP : ${hero.xp} / ${15 * hero.lev}`;
+	$heroAtt.textContent = `ATT : ${hero.att}`;
+	hero.name = name;
+});
+
