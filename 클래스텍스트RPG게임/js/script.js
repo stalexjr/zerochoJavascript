@@ -18,6 +18,15 @@ const hero = {
 	hp: 100,
 	xp: 0,
 	att: 10,
+	attack(monster) {
+		monster.hp -= this.att;
+		/* 객체안에 들어있는 this는 이 객체의 자기 자신을 가르킨다. 지금 이 객체는 hero이기 때문에 this는 결국 hero를 가르키게 되는 것이다. 객체 안에 들어있을 때는 아주 간단한데, 몇가지 예외가 있다. 만약 attack(monster)가 attack(monster)=>{} 화살표함수면 이 this가 달라져 버린다. 그래서 this는 화살표 함수가 아닌 일반 펑션일때만 온전히 자기 자신을 가르킨다. 화살표 함수일때는 브라우저 상태에선 윈도우가 되어버린다. 윈도우란 document의 부모요소이다. */ 
+		this.att -= monster.att;
+	},
+	heal(monster) {
+		this.hp += 20;
+		this.hp -= monster.att;
+	},
 };
 
 let monster = null;
@@ -74,11 +83,15 @@ $gameMenu.addEventListener('submit', (e) => {
 	$battleMenu.addEventListener('submit', (e) => {
 		e.preventDefault();
 		const input = e.target['battle-input'].value;
-		if (input === '1') {
+		if (input === '1') {	//공격
+			hero.attack(monster);
+			monster.attack(hero);
+			$heroHp.textContent = `HP: ${hero.hp}/${hero.maxHp}`;
+			$monsterHp.textContent = `HP: ${monster.hp}/${monster.maxHp}`;
+			$message.textContent = `${hero.att}의 데미지를 주고, ${monster.att}의 데미지를 받았다.`;
+		} else if (input === '2') {	//회복
 
-		} else if (input === '2') {
-
-		} else if (input === '3') {
+		} else if (input === '3') {	//도망
 
 		}
 	});
