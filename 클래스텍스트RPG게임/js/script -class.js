@@ -41,15 +41,15 @@ class Hero {
 		this.hp -= monster.att;
 	}
 }
-class Monster{
-	constructor(game, name, hp, att, xp){
+class Monster {
+	constructor(game, name, hp, att, xp) {
 		this.game = game;
 		this.name = name;
 		this.maxHp = hp;
 		this.xp = xp;
 		this.att = att;
 	}
-	attack(target){
+	attack(target) {
 		target.hp -= this.att;
 	}
 }
