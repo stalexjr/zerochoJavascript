@@ -14,12 +14,55 @@ const $message = document.querySelector('#message');
 class Game {
 	constructor(name) {
 		this.monster = null;
-		this.hero = null;
+		this.hero = new Hero(this, name);
 		this.monsterList = [
 			{ name: '슬라임', hp: 25, att: 10, xp: 10 },
 			{ name: '스켈레톤', hp: 50, att: 15, xp: 20 },
 			{ name: '마왕', hp: 150, att: 35, xp: 50 },
 		];
+		this.start();
+	}
+	start() {
+		$gameMenu.addEventListener('submit', this.onGameMenuInput);
+		$battleMenu.addEventListener('submit', this.onBattleMenuInput);
+		this.changeScreen('game');
+	}
+	changeScreen(screen) {
+		if (screen === 'start') {
+			$startSceern.style.display = 'block';
+			$gameMenu.style.display = 'none';
+			$battleMenu.style.display = 'none';
+		} else if(screen === 'game'){
+			$startSceern.style.display = 'none';
+			$gameMenu.style.display = 'block';
+			$battleMenu.style.display = 'none';
+		}else if(screen === 'battle'){
+			$startSceern.style.display = 'none';
+			$gameMenu.style.display = 'none';
+			$battleMenu.style.display = 'block';
+		}
+	}
+	onGameMenuInput = (e) => {
+		e.preventDefault();
+		const input = e.target['menu-input'].value;
+		if(input === '1'){	//모험
+			this.changeScreen('battle');
+		}else if(input === '2'){	//휴식
+
+		}else if(input === '3'){	//종료
+
+		}
+	}
+	onBattleMenuInput = (e) =>{
+		e.preventDefault();
+		const input = e.target['battle-input'].value;
+		if(input === '1'){	//공격
+
+		}else if(input ==='2'){		//회복
+
+		}else if(input === '3'){	//도망
+
+		}
 	}
 }
 
@@ -41,6 +84,7 @@ class Hero {
 		this.hp -= monster.att;
 	}
 }
+
 class Monster {
 	constructor(game, name, hp, att, xp) {
 		this.game = game;
@@ -58,28 +102,7 @@ let game = null;
 $startSceern.addEventListener('submit', (e) => {
 	e.preventDefault();
 	const name = e.target['name-input'].value;
-	game = new Game(name);
+	new Game(name);
 });
 
-$gameMenu.addEventListener('submit', (e) => {
-	e.preventDefault();
-	const input = e.target['menu-input'].value;
-	if (input === '1') {	//모험
-
-	} else if (input === '2') {		//휴식
-
-	} else if (input === '3') {		//종료
-
-	}
-	$battleMenu.addEventListener('submit', (e) => {
-		e.preventDefault();
-		const input = e.target['battle-input'].value;
-		if (input === '1') {	//공격
-		} else if (input === '2') {	//회복
-
-		} else if (input === '3') {	//도망
-
-		}
-	});
-});
 
