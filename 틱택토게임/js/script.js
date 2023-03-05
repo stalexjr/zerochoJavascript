@@ -146,8 +146,6 @@ const callback = (e) => {
 	}
 };
 
-
-
 for (let i = 0; i < 3; i++) {
 	const $tr = document.createElement('tr');
 	const cells = [];
